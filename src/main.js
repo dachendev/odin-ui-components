@@ -1,10 +1,15 @@
 import "./main.css";
+import Dropdown from "./modules/dropdown.js";
 
-function domLoaded() {
-  const p = document.createElement("p");
-  p.textContent = "Webpack is working!";
-
-  document.body.appendChild(p);
+function initDropdowns() {
+  const dropdowns = document.querySelectorAll(".dropdown");
+  dropdowns.forEach((dropdown) => {
+    Dropdown.create(dropdown);
+  });
 }
 
-window.addEventListener("DOMContentLoaded", domLoaded);
+function domLoaded() {
+  initDropdowns();
+}
+
+document.addEventListener("DOMContentLoaded", domLoaded);

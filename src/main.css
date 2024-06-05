@@ -1,3 +1,117 @@
-h1 {
-  color: red;
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  line-height: normal;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+/* Typography */
+
+.h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Symbols */
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-left: 0.3em solid transparent;
+}
+
+/* Layout */
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Utilities */
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+.mb-8 {
+  margin-bottom: 2rem !important;
+}
+
+/* Buttons */
+
+.btn {
+  --btn-border-color: #ccc;
+  --btn-color: #000;
+  --btn-bg: #f8f9fa;
+  --btn-hover-border-color: #adb5bd;
+  --btn-hover-color: #000;
+  --btn-hover-bg: #e9ecef;
+
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--btn-border-color);
+  border-radius: 0.25rem;
+  color: var(--btn-color);
+  background-color: var(--btn-bg);
+}
+
+.btn:hover {
+  border-color: var(--btn-hover-border-color);
+  color: var(--btn-hover-color);
+  background-color: var(--btn-hover-bg);
+}
+
+.btn-primary {
+  --btn-border-color: #007bff;
+  --btn-color: #fff;
+  --btn-bg: #007bff;
+  --btn-hover-border-color: #0069d9;
+  --btn-hover-color: #fff;
+  --btn-hover-bg: #0069d9;
+}
+
+/* Examples */
+
+.example {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
 }

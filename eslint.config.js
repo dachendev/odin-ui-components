@@ -12,6 +12,9 @@ export default [
         ...globals.browser,
       },
     },
-    rules: {},
+    rules: {
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+    },
   },
 ];
