@@ -54,18 +54,21 @@
   --carousel-control-border-color: #ccc;
   --carousel-control-color: #000;
   --carousel-control-bg: #f8f9fa;
-  --carousel-control-bg-rgb: 248, 249, 250;
+  --carousel-control-opacity: 0.5;
   --carousel-control-hover-border-color: #adb5bd;
   --carousel-control-hover-color: #000;
   --carousel-control-hover-bg: #e9ecef;
+  --carousel-control-hover-opacity: 0.75;
   width: 2.375rem;
   height: 2.375rem;
   border-radius: 50%;
   border: 1px solid var(--carousel-control-border-color);
   font-size: 1rem;
   color: var(--carousel-control-color);
-  background-color: rgba(var(--carousel-control-bg-rgb), 0.75);
+  background-color: var(--carousel-control-bg);
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  opacity: var(--carousel-control-opacity);
+  z-index: 100;
 }
 
 .carousel-control-next:hover,
@@ -73,6 +76,7 @@
   border-color: var(--carousel-control-hover-border-color);
   color: var(--carousel-control-hover-color);
   background-color: var(--carousel-control-hover-bg);
+  opacity: var(--carousel-control-hover-opacity);
 }
 
 .carousel-indicators {
@@ -87,7 +91,6 @@
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
-  z-index: 1;
 }
 
 .carousel-indicators .indicator {
@@ -99,6 +102,7 @@
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
   opacity: var(--carousel-indicator-opacity);
   cursor: pointer;
+  z-index: 100;
 }
 
 .carousel-indicators .indicator:hover {
