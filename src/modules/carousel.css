@@ -1,0 +1,97 @@
+.carousel {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.carousel-inner {
+  overflow: hidden;
+}
+
+.carousel-item {
+  display: none;
+}
+
+.carousel-item.active {
+  display: block;
+}
+
+.carousel-item img {
+  display: block;
+  width: 100%;
+}
+
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  margin-right: 0.5rem;
+}
+
+.carousel-control-prev {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  --carousel-control-border-color: #ccc;
+  --carousel-control-color: #000;
+  --carousel-control-bg: #f8f9fa;
+  --carousel-control-bg-rgb: 248, 249, 250;
+  --carousel-control-hover-border-color: #adb5bd;
+  --carousel-control-hover-color: #000;
+  --carousel-control-hover-bg: #e9ecef;
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: 50%;
+  border: 1px solid var(--carousel-control-border-color);
+  font-size: 1rem;
+  color: var(--carousel-control-color);
+  background-color: rgba(var(--carousel-control-bg-rgb), 0.75);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.carousel-control-next:hover,
+.carousel-control-prev:hover {
+  border-color: var(--carousel-control-hover-border-color);
+  color: var(--carousel-control-hover-color);
+  background-color: var(--carousel-control-hover-bg);
+}
+
+.carousel-indicators {
+  --carousel-indicator-opacity: 0.5;
+  --carousel-indicator-hover-opacity: 0.75;
+  --carousel-indicator-active-opacity: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.carousel-indicators .indicator {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #f8f9fa;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  opacity: var(--carousel-indicator-opacity);
+  cursor: pointer;
+}
+
+.carousel-indicators .indicator:hover {
+  opacity: var(--carousel-indicator-hover-opacity);
+}
+
+.carousel-indicators .indicator.active {
+  opacity: var(--carousel-indicator-active-opacity);
+}

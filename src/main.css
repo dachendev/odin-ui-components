@@ -23,6 +23,11 @@ button:not(:disabled) {
   cursor: pointer;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Typography */
 
 .h1 {
@@ -38,19 +43,6 @@ button:not(:disabled) {
 .h3 {
   font-size: 1rem;
   font-weight: 600;
-}
-
-/* Symbols */
-
-.caret {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  margin-left: 0.25rem;
-  vertical-align: middle;
-  border-top: 0.3em solid;
-  border-right: 0.3em solid transparent;
-  border-left: 0.3em solid transparent;
 }
 
 /* Layout */
