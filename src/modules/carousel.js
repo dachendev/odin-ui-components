@@ -13,40 +13,58 @@ export function create(element, options = {}) {
 
   // Set the carousel element option
   carousel.element = element;
+  carousel.autoStart = options.autoStart ?? true;
+  carousel.interval = options.interval;
 
-  // Get the carousel items and convert to an array
+  // Set the initial active index
   const items = carousel.element.querySelectorAll(".carousel-item");
-  const itemsArr = Array.from(items);
 
-  // Find the active item's index, default to 0 if not found
-  let activeIdx = itemsArr.findIndex((item) =>
+  let activeIdx = Array.from(items).findIndex((item) =>
     item.classList.contains("active")
   );
-  if (activeIdx === -1) {
+
+  if (activeIdx === -1 && items.length > 0) {
+    // Set the active index to 0
     activeIdx = 0;
+    // Make the first item active
+    items[0].classList.add("active");
   }
 
   // Create and add indicators for each item
   const indicatorList = carousel.element.querySelector(".carousel-indicators");
 
-  for (let i = 0; i < itemsArr.length; i++) {
-    const indicator = document.createElement("li");
-    indicator.classList.add("indicator");
-    if (i === activeIdx) {
-      indicator.classList.add("active");
+  function createIndicators() {
+    const items = carousel.element.querySelectorAll(".carousel-item");
+
+    // Clear previous indicators
+    indicatorList.innerHTML = "";
+
+    for (let i = 0; i < items.length; i++) {
+      const indicator = document.createElement("li");
+      indicator.classList.add("indicator");
+      if (i === activeIdx) {
+        indicator.classList.add("active");
+      }
+      indicatorList.appendChild(indicator);
     }
-    indicatorList.appendChild(indicator);
   }
 
-  const indicators = carousel.element.querySelectorAll(".indicator");
-  const indicatorsArr = Array.from(indicators);
+  if (indicatorList) {
+    createIndicators();
+  }
 
   /**
    * Transition the carousel to the specified item.
    * @param {number} idx - The index of the item to transition to.
    */
   carousel.goTo = (idx) => {
-    if (idx < 0 || idx >= itemsArr.length) {
+    const items = carousel.element.querySelectorAll(".carousel-item");
+
+    if (items.length === 0) {
+      return;
+    }
+
+    if (idx < 0 || idx >= items.length) {
       return;
     }
 
@@ -55,17 +73,18 @@ export function create(element, options = {}) {
     }
 
     // Remove active, prev, and next classes from all items
-    itemsArr.forEach((item) => {
+    items.forEach((item) => {
       item.classList.remove("active", "prev", "next");
     });
 
     // Update active index and transition to the new item
     activeIdx = idx;
-    const activeItem = itemsArr[activeIdx];
+    const activeItem = items[activeIdx];
 
     activeItem.classList.add("active");
 
     // Update indicators
+    const indicators = carousel.element.querySelectorAll(".indicator");
     indicators.forEach((indicator, i) => {
       if (i === activeIdx) {
         indicator.classList.add("active");
@@ -79,9 +98,10 @@ export function create(element, options = {}) {
    * Transition the carousel to the next item.
    */
   carousel.next = () => {
+    const items = carousel.element.querySelectorAll(".carousel-item");
     const nextIdx = activeIdx + 1;
 
-    if (nextIdx >= itemsArr.length) {
+    if (nextIdx >= items.length) {
       carousel.goTo(0);
     } else {
       carousel.goTo(nextIdx);
@@ -92,28 +112,55 @@ export function create(element, options = {}) {
    * Transition the carousel to the previous item.
    */
   carousel.prev = () => {
+    const items = carousel.element.querySelectorAll(".carousel-item");
     const prevIdx = activeIdx - 1;
 
     if (prevIdx < 0) {
-      carousel.goTo(itemsArr.length - 1);
+      carousel.goTo(items.length - 1);
     } else {
       carousel.goTo(prevIdx);
     }
   };
 
+  // Start the auto transition
+  let intervalId = null;
+
+  carousel.start = () => {
+    if (carousel.interval) {
+      intervalId = setTimeout(carousel.next, carousel.interval);
+    }
+  };
+
+  carousel.stop = () => {
+    if (intervalId) {
+      clearTimeout(intervalId);
+    }
+  };
+
+  if (carousel.autoStart && carousel.interval) {
+    carousel.start();
+  }
+
   // Add event listeners for next and previous controls
   const controlNext = carousel.element.querySelector(".carousel-control-next");
-  controlNext.addEventListener("click", carousel.next);
+  if (controlNext) {
+    controlNext.addEventListener("click", carousel.next);
+  }
 
   const controlPrev = carousel.element.querySelector(".carousel-control-prev");
-  controlPrev.addEventListener("click", carousel.prev);
+  if (controlPrev) {
+    controlPrev.addEventListener("click", carousel.prev);
+  }
 
   // Add event listeners for indicators
-  indicators.forEach((indicator) => {
-    indicator.addEventListener("click", () => {
-      const idx = indicatorsArr.indexOf(indicator);
-      carousel.goTo(idx);
-    });
+  indicatorList.addEventListener("click", (event) => {
+    if (!event.target.classList.contains("indicator")) {
+      return;
+    }
+
+    const indicators = carousel.element.querySelectorAll(".indicator");
+    const idx = Array.from(indicators).indexOf(event.target);
+    carousel.goTo(idx);
   });
 
   return carousel;

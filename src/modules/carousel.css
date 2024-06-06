@@ -2,10 +2,11 @@
   position: relative;
   border: 1px solid #ccc;
   border-radius: 0.25rem;
+  overflow: hidden;
 }
 
 .carousel-inner {
-  overflow: hidden;
+  width: 100%;
 }
 
 .carousel-item {
