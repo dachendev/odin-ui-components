@@ -30,6 +30,13 @@ img {
 
 /* Base */
 
+body {
+  --body-color: #fff;
+  --body-bg: #121212;
+  color: var(--body-color);
+  background-color: var(--body-bg);
+}
+
 a {
   color: #007bff;
   text-decoration: none;
